@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -18,12 +19,15 @@ import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import kotlinx.coroutines.launch
 import org.zayass.assessment.storage.feature.formBased.R
 import org.zayass.assessment.storage.feature.formBased.ui.forms.count.CountValuesForm
@@ -46,9 +50,30 @@ private fun Pages.title() = stringResource(id = when (this) {
     Pages.DELETE -> R.string.feature_formbased_ui_delete
 })
 
+@Composable
+fun StorageManagementForm(viewModel: TransactionsViewModel = hiltViewModel()) {
+    val isConfirmationVisible by viewModel.isConfirmationVisible.collectAsState()
+    StorageManagementForm(
+        onBeginTransaction = { viewModel.dispatchAction(UiAction.Begin) },
+        onCommitTransaction = { viewModel.dispatchAction(UiAction.Commit) },
+        onRollbackTransaction = { viewModel.dispatchAction(UiAction.Rollback) },
+        isConfirmationVisible = isConfirmationVisible,
+        onDismissConfirmation = { viewModel.dispatchAction(UiAction.DismissConfirmation) },
+        onConfirm = { viewModel.dispatchAction(UiAction.Confirm) }
+    )
+}
+
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun StorageManagementForm() {
+fun StorageManagementForm(
+    onBeginTransaction: () -> Unit,
+    onCommitTransaction: () -> Unit,
+    onRollbackTransaction: () -> Unit,
+
+    isConfirmationVisible: Boolean,
+    onDismissConfirmation: () -> Unit,
+    onConfirm: () -> Unit
+) {
     val pages = Pages.entries
 
     val pagerState = rememberPagerState(
@@ -101,32 +126,51 @@ fun StorageManagementForm() {
         }
 
         Spacer(modifier = Modifier.size(16.dp))
-        TransactionButtons()
+        TransactionButtons(
+            onBeginTransaction = onBeginTransaction,
+            onCommitTransaction = onCommitTransaction,
+            onRollbackTransaction = onRollbackTransaction
+        )
         Spacer(modifier = Modifier.size(16.dp))
+    }
+
+    if (isConfirmationVisible) {
+        AlertDialog(
+            title = {
+                Text(text = stringResource(R.string.feature_formbased_ui_are_you_sure))
+            },
+            onDismissRequest = onDismissConfirmation,
+            dismissButton = {
+                Button(onClick = onDismissConfirmation) {
+                    Text(text = stringResource(R.string.feature_formbased_ui_discard))
+                }
+            },
+            confirmButton = {
+                Button(onClick = onConfirm) {
+                    Text(text = stringResource(R.string.feature_formbased_ui_confirm))
+                }
+            },
+        )
     }
 }
 
 @Composable
-fun TransactionButtons() {
+fun TransactionButtons(
+    onBeginTransaction: () -> Unit,
+    onCommitTransaction: () -> Unit,
+    onRollbackTransaction: () -> Unit
+) {
     Row(modifier = Modifier.padding(horizontal = 16.dp)) {
-        Button(onClick = {}) {
+        Button(onClick = onBeginTransaction) {
             Text(text = stringResource(R.string.feature_formbased_ui_begin))
         }
         Spacer(modifier = Modifier.size(16.dp))
-        Button(onClick = {}) {
+        Button(onClick = onCommitTransaction) {
             Text(text = stringResource(R.string.feature_formbased_ui_commit))
         }
         Spacer(modifier = Modifier.size(16.dp))
-        Button(onClick = {}) {
+        Button(onClick = onRollbackTransaction) {
             Text(text = stringResource(R.string.feature_formbased_ui_rollback))
         }
-    }
-}
-
-@Preview
-@Composable
-fun StorageManagementFormPreview() {
-    Surface {
-        StorageManagementForm()
     }
 }

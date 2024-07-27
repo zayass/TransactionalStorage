@@ -13,4 +13,8 @@
     <string name="feature_formbased_ui_value_updated">Value updated</string>
     <string name="feature_formbased_ui_get_result">Value: %1$s</string>
     <string name="feature_formbased_ui_get_empty_result"><![CDATA[<No value for this key>]]></string>
+    <string name="feature_formbased_ui_are_you_sure">Are you sure?</string>
+    <string name="feature_formbased_ui_discard">Discard</string>
+    <string name="feature_formbased_ui_confirm">Confirm</string>
+    <string name="feature_formbased_ui_deleted">Deleted</string>
 </resources>

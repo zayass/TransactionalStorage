@@ -49,24 +49,24 @@ internal fun DeleteKeyForm(
         )
 
         if (result) {
-            Text(text = "Deleted")
+            Text(text = stringResource(R.string.feature_formbased_ui_deleted))
         }
     }
 
     if (isConfirmationVisible) {
         AlertDialog(
             title = {
-                Text(text = "Are you sure?")
+                Text(text = stringResource(id = R.string.feature_formbased_ui_are_you_sure))
             },
             onDismissRequest = onDismissConfirmation,
             dismissButton = {
                 Button(onClick = onDismissConfirmation) {
-                    Text(text = "Discard")
+                    Text(text = stringResource(id = R.string.feature_formbased_ui_discard))
                 }
             },
             confirmButton = {
                 Button(onClick = onConfirm) {
-                    Text(text = "Confirm")
+                    Text(text = stringResource(id = R.string.feature_formbased_ui_confirm))
                 }
             },
         )
