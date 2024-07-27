@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import org.zayass.assessment.storage.R
+import org.zayass.assessment.storage.feature.formBased.ui.StorageManagementForm
 import org.zayass.assessment.storage.ui.theme.AppTheme
 
 @Composable
@@ -28,6 +29,7 @@ fun ComposeRoot() {
                     .fillMaxSize()
                     .padding(innerPadding),
             ) {
+                StorageManagementForm()
             }
         }
     }

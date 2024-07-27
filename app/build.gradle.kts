@@ -25,6 +25,9 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.storage.impl)
+    implementation(projects.feature.formBased.ui)
+
     implementation(libs.kotlinx.coroutines.android)
 
     implementation(libs.androidx.activity.compose)

@@ -1,7 +1,5 @@
 package org.zayass.assessment.storage.core
 
-typealias StringSuspendStorage = SuspendStorage<String, String>
-
 interface SuspendStorage<K : Any, V : Any> {
     suspend fun get(key: K): V?
     suspend fun set(key: K, value: V)

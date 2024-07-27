@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feature_formbased_ui_execute">Execute</string>
+    <string name="feature_formbased_ui_get">GET</string>
+    <string name="feature_formbased_ui_count">COUNT</string>
+    <string name="feature_formbased_ui_set">SET</string>
+    <string name="feature_formbased_ui_delete">DELETE</string>
+    <string name="feature_formbased_ui_begin">Begin</string>
+    <string name="feature_formbased_ui_commit">Commit</string>
+    <string name="feature_formbased_ui_rollback">Rollback</string>
+    <string name="feature_formbased_ui_key">Key</string>
+    <string name="feature_formbased_ui_value">Value</string>
+    <string name="feature_formbased_ui_value_updated">Value updated</string>
+    <string name="feature_formbased_ui_get_result">Value: %1$s</string>
+    <string name="feature_formbased_ui_get_empty_result"><![CDATA[<No value for this key>]]></string>
+</resources>
