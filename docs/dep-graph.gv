@@ -1,0 +1,6 @@
+digraph G {
+":app" -> ":core:storage:impl" [color=red style=bold]
+":app" -> ":feature:formBased:ui"
+":core:storage:impl" -> ":core:storage:api" [color=red style=bold]
+":feature:formBased:ui" -> ":core:storage:api"
+}

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="368pt" height="188pt" viewBox="0 0 367.77 188">
+    <g class="graph">
+        <path fill="#fff" d="M0 188V0h367.77v188z"/>
+        <g class="node" transform="translate(4 184)">
+            <ellipse cx="172.48" cy="-162" fill="none" stroke="#000" rx="27" ry="18"/>
+            <text x="172.48" y="-156.95" font-family="Times,serif" font-size="14" text-anchor="middle">:app</text>
+        </g>
+        <g class="node" transform="translate(4 184)">
+            <ellipse cx="78.48" cy="-90" fill="none" stroke="#000" rx="78.48" ry="18"/>
+            <text x="78.48" y="-84.95" font-family="Times,serif" font-size="14" text-anchor="middle">:core:storage:impl</text>
+        </g>
+        <g stroke="red" stroke-width="2" class="edge">
+            <path fill="none" d="M158.8 36.17c-12.69 9.44-30.11 22.42-45.11 33.59"/>
+            <path fill="red" d="m117.26 71.46-10.11 3.17 5.93-8.78z"/>
+        </g>
+        <g class="node" transform="translate(4 184)">
+            <ellipse cx="267.48" cy="-90" fill="none" stroke="#000" rx="92.3" ry="18"/>
+            <text x="267.48" y="-84.95" font-family="Times,serif" font-size="14" text-anchor="middle">:feature:formBased:ui</text>
+        </g>
+        <g stroke="#000" class="edge">
+            <path fill="none" d="M193.9 35.84c12.78 9.41 30.48 22.46 45.75 33.71"/>
+            <path d="m241.59 66.63 5.97 8.75-10.12-3.11z"/>
+        </g>
+        <g class="node" transform="translate(4 184)">
+            <ellipse cx="172.48" cy="-18" fill="none" stroke="#000" rx="72.34" ry="18"/>
+            <text x="172.48" y="-12.95" font-family="Times,serif" font-size="14" text-anchor="middle">:core:storage:api</text>
+        </g>
+        <g stroke="red" stroke-width="2" class="edge">
+            <path fill="none" d="M104.75 111.59c12.06 8.98 27.15 20.22 40.38 30.07"/>
+            <path fill="red" d="m146 137.94 5.93 8.78-10.11-3.16z"/>
+        </g>
+        <g stroke="#000" class="edge">
+            <path fill="none" d="M248.96 111.59c-12.3 9.07-27.73 20.44-41.19 30.35"/>
+            <path d="m210.17 144.52-10.12 3.11 5.97-8.75z"/>
+        </g>
+    </g>
+</svg>
