@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class CountValuesViewModel @Inject constructor(
-    private val storage: StringSuspendStorage
+    private val storage: StringSuspendStorage,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(UiState())
@@ -31,7 +31,7 @@ internal class CountValuesViewModel @Inject constructor(
         _uiState.update {
             UiState(
                 value = value,
-                isExecuteEnabled = value.isNotEmpty()
+                isExecuteEnabled = value.isNotEmpty(),
             )
         }
     }
@@ -41,7 +41,7 @@ internal class CountValuesViewModel @Inject constructor(
         val count = storage.count(value)
         _uiState.update {
             it.copy(
-                result = count
+                result = count,
             )
         }
     }

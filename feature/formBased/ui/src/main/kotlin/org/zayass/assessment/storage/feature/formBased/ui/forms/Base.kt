@@ -1,11 +1,8 @@
 package org.zayass.assessment.storage.feature.formBased.ui.forms
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
@@ -23,7 +20,7 @@ internal fun OneFieldForm(
     onValueChange: (String) -> Unit,
     label: String,
     isExecuteEnabled: Boolean,
-    onExecute: () -> Unit
+    onExecute: () -> Unit,
 ) {
     Column {
         OutlinedTextField(
@@ -37,7 +34,7 @@ internal fun OneFieldForm(
 
         ExecuteButton(
             enabled = isExecuteEnabled,
-            onExecute = onExecute
+            onExecute = onExecute,
         )
     }
 }
@@ -51,7 +48,7 @@ internal fun TwoFieldForm(
     label1: String,
     label2: String,
     isExecuteEnabled: Boolean,
-    onExecute: () -> Unit
+    onExecute: () -> Unit,
 ) {
     Column {
         OutlinedTextField(
@@ -74,7 +71,7 @@ internal fun TwoFieldForm(
 
         ExecuteButton(
             enabled = isExecuteEnabled,
-            onExecute = onExecute
+            onExecute = onExecute,
         )
     }
 }
@@ -92,7 +89,7 @@ private fun ColumnScope.ExecuteButton(
     Button(
         modifier = Modifier.align(alignment = Alignment.End),
         enabled = enabled,
-        onClick = onExecute
+        onClick = onExecute,
     ) {
         Text(text = stringResource(R.string.feature_formbased_ui_execute))
     }

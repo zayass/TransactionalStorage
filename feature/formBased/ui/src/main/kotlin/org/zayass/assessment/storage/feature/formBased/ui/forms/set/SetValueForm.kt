@@ -14,7 +14,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.zayass.assessment.storage.feature.formBased.R
 import org.zayass.assessment.storage.feature.formBased.ui.forms.TwoFieldForm
 
-
 @Composable
 internal fun SetValueForm(viewModel: SetValueViewModel = hiltViewModel()) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
@@ -25,7 +24,7 @@ internal fun SetValueForm(viewModel: SetValueViewModel = hiltViewModel()) {
         value = state.value,
         onValueChanged = { viewModel.dispatchAction(UiAction.ValueChanged(it)) },
         isExecuteEnabled = state.isExecuteEnabled,
-        onExecute = { viewModel.dispatchAction(UiAction.Execute) }
+        onExecute = { viewModel.dispatchAction(UiAction.Execute) },
     )
 }
 
@@ -37,7 +36,7 @@ internal fun SetValueForm(
     value: String,
     onValueChanged: (String) -> Unit,
     isExecuteEnabled: Boolean,
-    onExecute: () -> Unit
+    onExecute: () -> Unit,
 ) {
     Column {
         TwoFieldForm(

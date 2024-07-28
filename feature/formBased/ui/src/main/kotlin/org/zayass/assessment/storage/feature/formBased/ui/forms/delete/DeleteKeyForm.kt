@@ -12,7 +12,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.zayass.assessment.storage.feature.formBased.R
 import org.zayass.assessment.storage.feature.formBased.ui.forms.OneFieldForm
 
-
 @Composable
 internal fun DeleteKeyForm(viewModel: DeleteKeyViewModel = hiltViewModel()) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
@@ -20,11 +19,11 @@ internal fun DeleteKeyForm(viewModel: DeleteKeyViewModel = hiltViewModel()) {
         result = state.result,
         key = state.key,
         onKeyChanged = { viewModel.dispatchAction(UiAction.KeyChanged(it)) },
-        isExecuteEnabled =  state.isExecuteEnabled,
+        isExecuteEnabled = state.isExecuteEnabled,
         onExecute = { viewModel.dispatchAction(UiAction.Execute) },
         isConfirmationVisible = state.isConfirmationVisible,
         onConfirm = { viewModel.dispatchAction(UiAction.Confirm) },
-        onDismissConfirmation = { viewModel.dispatchAction(UiAction.DismissConfirmation) }
+        onDismissConfirmation = { viewModel.dispatchAction(UiAction.DismissConfirmation) },
     )
 }
 
@@ -37,7 +36,7 @@ internal fun DeleteKeyForm(
     onExecute: () -> Unit,
     isConfirmationVisible: Boolean,
     onConfirm: () -> Unit,
-    onDismissConfirmation: () -> Unit
+    onDismissConfirmation: () -> Unit,
 ) {
     Column {
         OneFieldForm(
@@ -45,7 +44,7 @@ internal fun DeleteKeyForm(
             onValueChange = onKeyChanged,
             label = stringResource(R.string.feature_formbased_ui_key),
             isExecuteEnabled = isExecuteEnabled,
-            onExecute = onExecute
+            onExecute = onExecute,
         )
 
         if (result) {

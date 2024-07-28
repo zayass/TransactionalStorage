@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class DeleteKeyViewModel @Inject constructor(
-    private val storage: StringSuspendStorage
+    private val storage: StringSuspendStorage,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(UiState())
@@ -33,7 +33,7 @@ internal class DeleteKeyViewModel @Inject constructor(
         _uiState.update {
             UiState(
                 key = key,
-                isExecuteEnabled = key.isNotEmpty()
+                isExecuteEnabled = key.isNotEmpty(),
             )
         }
     }
@@ -41,7 +41,7 @@ internal class DeleteKeyViewModel @Inject constructor(
     private fun handleExecute() {
         _uiState.update {
             it.copy(
-                isConfirmationVisible = true
+                isConfirmationVisible = true,
             )
         }
     }
@@ -49,7 +49,7 @@ internal class DeleteKeyViewModel @Inject constructor(
     private fun handleDismissConfirmation() {
         _uiState.update {
             it.copy(
-                isConfirmationVisible = false
+                isConfirmationVisible = false,
             )
         }
     }

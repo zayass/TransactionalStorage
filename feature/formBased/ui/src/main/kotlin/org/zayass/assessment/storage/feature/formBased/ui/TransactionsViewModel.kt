@@ -17,18 +17,18 @@ import javax.inject.Inject
 private enum class ConfirmationStatus {
     NONE,
     COMMIT_REQUESTED,
-    ROLLBACK_REQUESTED
+    ROLLBACK_REQUESTED,
 }
 
 data class UiState(
     val isConfirmationVisible: Boolean = false,
     @StringRes
-    val message: Int? = null
+    val message: Int? = null,
 )
 
 @HiltViewModel
 class TransactionsViewModel @Inject internal constructor(
-    private val storage: StringSuspendStorage
+    private val storage: StringSuspendStorage,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(UiState())
     val uiState: StateFlow<UiState>
@@ -78,6 +78,7 @@ class TransactionsViewModel @Inject internal constructor(
             ConfirmationStatus.ROLLBACK_REQUESTED -> rollback()
             ConfirmationStatus.NONE -> { }
         }
+        confirmationStatus = ConfirmationStatus.NONE
     }
 
     private fun commit() = viewModelScope.launch {

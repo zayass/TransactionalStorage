@@ -14,19 +14,16 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -41,21 +38,23 @@ internal enum class Pages {
     GET,
     COUNT,
     SET,
-    DELETE
+    DELETE,
 }
 
 @Composable
-private fun Pages.title() = stringResource(id = when (this) {
-    Pages.GET -> R.string.feature_formbased_ui_get
-    Pages.COUNT -> R.string.feature_formbased_ui_count
-    Pages.SET -> R.string.feature_formbased_ui_set
-    Pages.DELETE -> R.string.feature_formbased_ui_delete
-})
+private fun Pages.title() = stringResource(
+    id = when (this) {
+        Pages.GET -> R.string.feature_formbased_ui_get
+        Pages.COUNT -> R.string.feature_formbased_ui_count
+        Pages.SET -> R.string.feature_formbased_ui_set
+        Pages.DELETE -> R.string.feature_formbased_ui_delete
+    },
+)
 
 @Composable
 fun StorageManagementForm(
     viewModel: TransactionsViewModel = hiltViewModel(),
-    onShowSnackbar: suspend (message: String, action: String?) -> Boolean = { _, _ -> false }
+    onShowSnackbar: suspend (message: String, action: String?) -> Boolean = { _, _ -> false },
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val message = uiState.message?.let {
@@ -75,7 +74,7 @@ fun StorageManagementForm(
         onRollbackTransaction = { viewModel.dispatchAction(UiAction.Rollback) },
         isConfirmationVisible = uiState.isConfirmationVisible,
         onDismissConfirmation = { viewModel.dispatchAction(UiAction.DismissConfirmation) },
-        onConfirm = { viewModel.dispatchAction(UiAction.Confirm) }
+        onConfirm = { viewModel.dispatchAction(UiAction.Confirm) },
     )
 }
 
@@ -85,10 +84,9 @@ fun StorageManagementForm(
     onBeginTransaction: () -> Unit,
     onCommitTransaction: () -> Unit,
     onRollbackTransaction: () -> Unit,
-
     isConfirmationVisible: Boolean,
     onDismissConfirmation: () -> Unit,
-    onConfirm: () -> Unit
+    onConfirm: () -> Unit,
 ) {
     val pages = Pages.entries
 
@@ -103,7 +101,7 @@ fun StorageManagementForm(
     Column(modifier = Modifier.imePadding()) {
         TabRow(
             selectedTabIndex = tabIndex,
-            containerColor = MaterialTheme.colorScheme.primaryContainer
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
         ) {
             pages.forEachIndexed { index, page ->
                 Tab(
@@ -129,7 +127,7 @@ fun StorageManagementForm(
                 modifier = Modifier
                     .padding(top = 32.dp)
                     .fillMaxWidth(),
-                contentAlignment = Alignment.TopCenter
+                contentAlignment = Alignment.TopCenter,
             ) {
                 val page = pages[index]
                 when (page) {
@@ -145,7 +143,7 @@ fun StorageManagementForm(
         TransactionButtons(
             onBeginTransaction = onBeginTransaction,
             onCommitTransaction = onCommitTransaction,
-            onRollbackTransaction = onRollbackTransaction
+            onRollbackTransaction = onRollbackTransaction,
         )
         Spacer(modifier = Modifier.size(16.dp))
     }
@@ -174,7 +172,7 @@ fun StorageManagementForm(
 fun TransactionButtons(
     onBeginTransaction: () -> Unit,
     onCommitTransaction: () -> Unit,
-    onRollbackTransaction: () -> Unit
+    onRollbackTransaction: () -> Unit,
 ) {
     Row(modifier = Modifier.padding(horizontal = 16.dp)) {
         Button(onClick = onBeginTransaction) {

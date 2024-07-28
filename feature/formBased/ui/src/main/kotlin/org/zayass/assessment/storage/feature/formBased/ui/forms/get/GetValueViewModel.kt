@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class GetValueViewModel @Inject constructor(
-    private val storage: StringSuspendStorage
+    private val storage: StringSuspendStorage,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(UiState())
@@ -31,7 +31,7 @@ internal class GetValueViewModel @Inject constructor(
         _uiState.update {
             UiState(
                 key = key,
-                isExecuteEnabled = key.isNotEmpty()
+                isExecuteEnabled = key.isNotEmpty(),
             )
         }
     }
@@ -43,7 +43,7 @@ internal class GetValueViewModel @Inject constructor(
         _uiState.update {
             it.copy(
                 isResultVisible = true,
-                result = value
+                result = value,
             )
         }
     }
