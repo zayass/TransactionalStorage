@@ -12,5 +12,6 @@ dependencies {
     api(projects.core.storage.api)
 
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.lifecycle)
     implementation(libs.hilt.navigation.compose)
 }

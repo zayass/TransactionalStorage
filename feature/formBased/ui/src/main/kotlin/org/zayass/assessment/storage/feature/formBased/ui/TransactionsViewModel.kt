@@ -1,13 +1,17 @@
 package org.zayass.assessment.storage.feature.formBased.ui
 
+import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.zayass.assessment.storage.core.StringSuspendStorage
+import org.zayass.assessment.storage.core.TransactionResult
+import org.zayass.assessment.storage.feature.formBased.R
 import javax.inject.Inject
 
 private enum class ConfirmationStatus {
@@ -16,13 +20,19 @@ private enum class ConfirmationStatus {
     ROLLBACK_REQUESTED
 }
 
+data class UiState(
+    val isConfirmationVisible: Boolean = false,
+    @StringRes
+    val message: Int? = null
+)
+
 @HiltViewModel
 class TransactionsViewModel @Inject internal constructor(
     private val storage: StringSuspendStorage
 ) : ViewModel() {
-    private val _isConfirmationVisible = MutableStateFlow(false)
-    val isConfirmationVisible: StateFlow<Boolean>
-        get() = _isConfirmationVisible.asStateFlow()
+    private val _uiState = MutableStateFlow(UiState())
+    val uiState: StateFlow<UiState>
+        get() = _uiState.asStateFlow()
 
     private var confirmationStatus = ConfirmationStatus.NONE
 
@@ -33,6 +43,7 @@ class TransactionsViewModel @Inject internal constructor(
             UiAction.Rollback -> handleRollback()
             UiAction.DismissConfirmation -> handleDismissConfirmation()
             UiAction.Confirm -> handleConfirm()
+            UiAction.DismissMessage -> handleDismissMessage()
         }
     }
 
@@ -42,17 +53,23 @@ class TransactionsViewModel @Inject internal constructor(
 
     private fun handleCommit() {
         confirmationStatus = ConfirmationStatus.COMMIT_REQUESTED
-        _isConfirmationVisible.value = true
+        _uiState.update {
+            it.copy(isConfirmationVisible = true)
+        }
     }
 
     private fun handleRollback() {
         confirmationStatus = ConfirmationStatus.ROLLBACK_REQUESTED
-        _isConfirmationVisible.value = true
+        _uiState.update {
+            it.copy(isConfirmationVisible = true)
+        }
     }
 
     private fun handleDismissConfirmation() {
         confirmationStatus = ConfirmationStatus.NONE
-        _isConfirmationVisible.value = false
+        _uiState.update {
+            it.copy(isConfirmationVisible = false)
+        }
     }
 
     private fun handleConfirm() {
@@ -61,15 +78,35 @@ class TransactionsViewModel @Inject internal constructor(
             ConfirmationStatus.ROLLBACK_REQUESTED -> rollback()
             ConfirmationStatus.NONE -> { }
         }
-
-        _isConfirmationVisible.value = false
     }
 
     private fun commit() = viewModelScope.launch {
-        storage.commit()
+        val result = storage.commit()
+        val message = when (result) {
+            TransactionResult.SUCCESS -> R.string.feature_formbased_ui_commited
+            TransactionResult.NOT_IN_TRANSACTION -> R.string.feature_formbased_ui_not_in_transaction
+        }
+
+        _uiState.update {
+            UiState(message = message)
+        }
     }
 
     private fun rollback() = viewModelScope.launch {
-        storage.rollback()
+        val result = storage.rollback()
+        val message = when (result) {
+            TransactionResult.SUCCESS -> R.string.feature_formbased_ui_rolled_back
+            TransactionResult.NOT_IN_TRANSACTION -> R.string.feature_formbased_ui_not_in_transaction
+        }
+
+        _uiState.update {
+            UiState(message = message)
+        }
+    }
+
+    private fun handleDismissMessage() {
+        _uiState.update {
+            it.copy(message = null)
+        }
     }
 }

@@ -7,13 +7,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.zayass.assessment.storage.feature.formBased.R
 import org.zayass.assessment.storage.feature.formBased.ui.forms.OneFieldForm
 import org.zayass.assessment.storage.feature.formBased.ui.forms.TwoFieldForm
 
 @Composable
 internal fun GetValueForm(viewModel: GetValueViewModel = hiltViewModel()) {
-    val state by viewModel.uiState.collectAsState()
+    val state by viewModel.uiState.collectAsStateWithLifecycle()
     GetValueForm(
         isValueVisible = state.isResultVisible,
         value = state.result,

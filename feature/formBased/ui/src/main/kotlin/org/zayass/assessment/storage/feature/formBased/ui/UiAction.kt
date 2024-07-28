@@ -6,4 +6,5 @@ internal sealed interface UiAction {
     data object Rollback: UiAction
     data object DismissConfirmation: UiAction
     data object Confirm: UiAction
+    data object DismissMessage : UiAction
 }

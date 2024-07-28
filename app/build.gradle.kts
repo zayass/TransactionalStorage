@@ -31,7 +31,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
 
     implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.lifecycle.runtime.compose.android)
+    implementation(libs.androidx.compose.lifecycle)
     implementation(libs.androidx.compose.material3)
     implementation(libs.hilt.navigation.compose)
 }

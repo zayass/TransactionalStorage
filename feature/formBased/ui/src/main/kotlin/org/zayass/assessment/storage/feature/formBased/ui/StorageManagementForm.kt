@@ -19,6 +19,7 @@ import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
@@ -28,6 +29,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
 import org.zayass.assessment.storage.feature.formBased.R
 import org.zayass.assessment.storage.feature.formBased.ui.forms.count.CountValuesForm
@@ -51,13 +53,27 @@ private fun Pages.title() = stringResource(id = when (this) {
 })
 
 @Composable
-fun StorageManagementForm(viewModel: TransactionsViewModel = hiltViewModel()) {
-    val isConfirmationVisible by viewModel.isConfirmationVisible.collectAsState()
+fun StorageManagementForm(
+    viewModel: TransactionsViewModel = hiltViewModel(),
+    onShowSnackbar: suspend (message: String, action: String?) -> Boolean = { _, _ -> false }
+) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val message = uiState.message?.let {
+        stringResource(id = it)
+    }
+
+    LaunchedEffect(message) {
+        if (message != null) {
+            onShowSnackbar(message, null)
+            viewModel.dispatchAction(UiAction.DismissMessage)
+        }
+    }
+
     StorageManagementForm(
         onBeginTransaction = { viewModel.dispatchAction(UiAction.Begin) },
         onCommitTransaction = { viewModel.dispatchAction(UiAction.Commit) },
         onRollbackTransaction = { viewModel.dispatchAction(UiAction.Rollback) },
-        isConfirmationVisible = isConfirmationVisible,
+        isConfirmationVisible = uiState.isConfirmationVisible,
         onDismissConfirmation = { viewModel.dispatchAction(UiAction.DismissConfirmation) },
         onConfirm = { viewModel.dispatchAction(UiAction.Confirm) }
     )

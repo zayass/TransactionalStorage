@@ -17,4 +17,8 @@
     <string name="feature_formbased_ui_discard">Discard</string>
     <string name="feature_formbased_ui_confirm">Confirm</string>
     <string name="feature_formbased_ui_deleted">Deleted</string>
+    <string name="feature_formbased_ui_count_result">Count: %1$s</string>
+    <string name="feature_formbased_ui_commited">Commited</string>
+    <string name="feature_formbased_ui_not_in_transaction">Not in transaction</string>
+    <string name="feature_formbased_ui_rolled_back">Rolled back</string>
 </resources>
