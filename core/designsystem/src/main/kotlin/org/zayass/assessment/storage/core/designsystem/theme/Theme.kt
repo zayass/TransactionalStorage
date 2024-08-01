@@ -8,7 +8,17 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
+import org.zayass.assessment.storage.core.designsystem.theme.Dimens
+import org.zayass.assessment.storage.core.designsystem.theme.LocalDimens
+import org.zayass.assessment.storage.core.designsystem.theme.Pink40
+import org.zayass.assessment.storage.core.designsystem.theme.Pink80
+import org.zayass.assessment.storage.core.designsystem.theme.Purple40
+import org.zayass.assessment.storage.core.designsystem.theme.Purple80
+import org.zayass.assessment.storage.core.designsystem.theme.PurpleGrey40
+import org.zayass.assessment.storage.core.designsystem.theme.PurpleGrey80
+import org.zayass.assessment.storage.core.designsystem.theme.Typography
 
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
@@ -52,6 +62,11 @@ fun AppTheme(
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,
-        content = content,
-    )
+    ) {
+        CompositionLocalProvider(
+            LocalDimens provides Dimens()
+        ) {
+            content()
+        }
+    }
 }

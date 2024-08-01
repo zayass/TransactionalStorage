@@ -1,4 +1,4 @@
-package org.zayass.assessment.storage.ui.theme
+package org.zayass.assessment.storage.core.designsystem.theme
 
 import androidx.compose.ui.graphics.Color
 

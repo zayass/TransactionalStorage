@@ -2,8 +2,6 @@ package org.zayass.assessment.storage.feature.formBased.ui.forms
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -11,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
+import org.zayass.assessment.storage.core.designsystem.components.MediumSpacer
 import org.zayass.assessment.storage.feature.formBased.R
 
 @Composable
@@ -30,7 +28,7 @@ internal fun OneFieldForm(
                 Text(text = label)
             },
         )
-        FormSpacer()
+        MediumSpacer()
 
         ExecuteButton(
             enabled = isExecuteEnabled,
@@ -58,7 +56,7 @@ internal fun TwoFieldForm(
                 Text(text = label1)
             },
         )
-        FormSpacer()
+        MediumSpacer()
 
         OutlinedTextField(
             value = value2,
@@ -67,18 +65,13 @@ internal fun TwoFieldForm(
                 Text(text = label2)
             },
         )
-        FormSpacer()
+        MediumSpacer()
 
         ExecuteButton(
             enabled = isExecuteEnabled,
             onExecute = onExecute,
         )
     }
-}
-
-@Composable
-private fun FormSpacer() {
-    Spacer(modifier = Modifier.size(16.dp))
 }
 
 @Composable

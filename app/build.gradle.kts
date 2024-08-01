@@ -25,6 +25,7 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.designsystem)
     implementation(projects.core.storage.impl)
     implementation(projects.feature.formBased.ui)
 
