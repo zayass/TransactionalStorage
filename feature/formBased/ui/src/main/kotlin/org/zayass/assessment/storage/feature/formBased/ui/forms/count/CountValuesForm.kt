@@ -1,16 +1,13 @@
 package org.zayass.assessment.storage.feature.formBased.ui.forms.count
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import org.zayass.assessment.storage.core.designsystem.components.MediumSpacer
 import org.zayass.assessment.storage.feature.formBased.R
 import org.zayass.assessment.storage.feature.formBased.ui.forms.OneFieldForm
 
@@ -43,7 +40,7 @@ internal fun CountValuesForm(
             onExecute = onExecute,
         )
         if (count != null) {
-            Spacer(modifier = Modifier.size(16.dp))
+            MediumSpacer()
             Text(text = stringResource(R.string.feature_formbased_ui_count_result, count))
         }
     }

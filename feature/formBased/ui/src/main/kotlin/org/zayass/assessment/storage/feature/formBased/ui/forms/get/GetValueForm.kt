@@ -7,6 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import org.zayass.assessment.storage.core.designsystem.components.MediumSpacer
 import org.zayass.assessment.storage.feature.formBased.R
 import org.zayass.assessment.storage.feature.formBased.ui.forms.OneFieldForm
 
@@ -42,6 +43,8 @@ internal fun GetValueForm(
         )
 
         if (isValueVisible) {
+            MediumSpacer()
+
             val text = if (value != null) {
                 stringResource(R.string.feature_formbased_ui_get_result, value)
             } else {

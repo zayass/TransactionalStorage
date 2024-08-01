@@ -25,6 +25,7 @@ rootProject.name = "TransactionalStorage"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(":app")
+include(":core:designsystem")
 include(":core:storage:api")
 include(":core:storage:impl")
 include(":feature:formBased:ui")
