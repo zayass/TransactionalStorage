@@ -4,11 +4,9 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
@@ -26,10 +24,11 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
+import org.zayass.assessment.storage.core.designsystem.components.MediumSpacer
+import org.zayass.assessment.storage.core.designsystem.theme.dimens
 import org.zayass.assessment.storage.feature.formBased.R
 import org.zayass.assessment.storage.feature.formBased.ui.forms.count.CountValuesForm
 import org.zayass.assessment.storage.feature.formBased.ui.forms.delete.DeleteKeyForm
@@ -129,7 +128,7 @@ fun StorageManagementForm(
         ) { index ->
             Box(
                 modifier = Modifier
-                    .padding(top = 32.dp)
+                    .padding(top = MaterialTheme.dimens.veryLarge)
                     .fillMaxWidth(),
                 contentAlignment = Alignment.TopCenter,
             ) {
@@ -143,13 +142,13 @@ fun StorageManagementForm(
             }
         }
 
-        Spacer(modifier = Modifier.size(16.dp))
+        MediumSpacer()
         TransactionButtons(
             onBeginTransaction = onBeginTransaction,
             onCommitTransaction = onCommitTransaction,
             onRollbackTransaction = onRollbackTransaction,
         )
-        Spacer(modifier = Modifier.size(16.dp))
+        MediumSpacer()
     }
 
     if (isConfirmationVisible) {
@@ -178,15 +177,15 @@ fun TransactionButtons(
     onCommitTransaction: () -> Unit,
     onRollbackTransaction: () -> Unit,
 ) {
-    Row(modifier = Modifier.padding(horizontal = 16.dp)) {
+    Row(modifier = Modifier.padding(horizontal = MaterialTheme.dimens.medium)) {
         Button(onClick = onBeginTransaction) {
             Text(text = stringResource(R.string.feature_formbased_ui_begin))
         }
-        Spacer(modifier = Modifier.size(16.dp))
+        MediumSpacer()
         Button(onClick = onCommitTransaction) {
             Text(text = stringResource(R.string.feature_formbased_ui_commit))
         }
-        Spacer(modifier = Modifier.size(16.dp))
+        MediumSpacer()
         Button(onClick = onRollbackTransaction) {
             Text(text = stringResource(R.string.feature_formbased_ui_rollback))
         }
