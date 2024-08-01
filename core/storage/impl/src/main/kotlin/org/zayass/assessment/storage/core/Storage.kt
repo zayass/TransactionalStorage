@@ -134,9 +134,8 @@ internal class StorageImpl<K : Any, V : Any> : Storage<K, V> {
      * Time complexity: O(d) where d is depth of nested transactions
      */
     override fun count(value: V): Int {
-        val transactionsDiff = transactions.fold(0) { acc, transaction ->
-            val count = transaction.counter[value] ?: 0
-            acc + count
+        val transactionsDiff = transactions.sumOf { transaction ->
+            transaction.counter[value] ?: 0
         }
 
         val count = rootCounter[value] ?: 0
