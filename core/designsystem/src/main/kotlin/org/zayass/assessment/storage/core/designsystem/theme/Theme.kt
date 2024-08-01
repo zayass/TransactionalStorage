@@ -64,7 +64,7 @@ fun AppTheme(
         typography = Typography,
     ) {
         CompositionLocalProvider(
-            LocalDimens provides Dimens()
+            LocalDimens provides Dimens(),
         ) {
             content()
         }
